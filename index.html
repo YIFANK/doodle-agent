@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Doodle Agent: Exploring Freeform Visual Generation with Multimodal LLMs">
+  <meta name="viewport" content="width=device-width, initial-scale=0.1">
+  <title>Doodle Agent: Exploring Freeform Visual Generation with Multimodal LLMs</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-tooltip.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  
+</head>
+<body>
+
+<!--Title block-->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop" id="top">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Doodle Agent: Exploring Freeform Visual Generation with Multimodal LLMs</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Dingning Cao<sup>1</sup>,</span>
+            <span class="author-block">
+              Yifan Kang<sup>1</sup>,</span>
+            <span class="author-block">
+              Antonio Torralba<sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.csail.mit.edu/person/yael-vinker">Yael Vinker</a><sup>1</sup>,</span>
+            </span>
+          </div>
+          <br>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>MIT</span> 
+          </div>
+
+           <div class="is-size-3 publication-authors">
+            <span class="author-block">ICCV 2025 Workshop on AI4VA</span> 
+          </div>
+
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://openreview.net/pdf?id=oT8pxhfPzT" target="_blank"
+                  class="external-link button is-normal is-rounded">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://openreview.net/pdf?id=oT8pxhfPzT" target="_blank"
+                  class="external-link button is-normal is-rounded">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="https://github.com/YIFANK/DoodleAgent" target="_blank"
+                class="external-link button is-normal is-rounded">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+              </span>
+           
+            </div>
+          </div>
+
+          <!-- <div class="container is-max-desktop">
+    
+            <div class="item">
+              <p style="margin-bottom: 30px">
+            <video poster="" id="tree" autoplay controls muted loop height="100%">
+              <source src="static/SketchAgent.mp4" type="video/mp4">
+            </video>
+            
+            </p>
+          </div> -->
+      </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Abstract. -->
+<!-- <section class="section"> -->
+  <section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">What is Doodle Agent?</h2>
+        <div class="content has-text-justified">
+        <p>
+          Doodle Agent is a drawing system that leverages LLMs to generate sequential sketches. &#x1F58C;&#xFE0F; <br>
+          Given a text prompt, it produces a sequence of strokes that are rendered to the canvas, transforming language into visual concepts! &#x1F3A8;
+        </p>
+        </div>
+        <div class="item">
+          <p style="margin-bottom: 30px">
+        <video poster="" id="tree" autoplay controls muted loop height="100%">
+          <source src="static/apps/SketchAgent_apps1.mov" type="video/mp4">
+        </video>
+        </p>
+         </div>
+
+        
+
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="section  hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+   
+
+         <h2 class="title is-3">What Can You Do with It?</h2>
+         
+
+         <div class="content has-text-justified">
+          
+          <p>
+            <h3 class="title is-4">🖌️ Interactive Sketching</h3>
+            Through our interface, users can <strong style="color: #eb4e75;">collaborate</strong> with SketchAgent to draw together, stroke by stroke, engaging in a fun and creative drawing experience. <strong> <a href="https://github.com/yael-vinker/SketchAgent" class="demo-link">Check out our demo!</a></strong>
+          </p>
+          </div>
+          <div class="item">
+            <p style="margin-bottom: 30px">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="static/apps/sketchagent_app2.mov" type="video/mp4">
+          </video>
+          </p>
+           </div>
+
+           <div class="content has-text-justified">
+            <p>
+              <h3 class="title is-4">🖌️ Chat-Based Sketch Editing</h3>
+              Users can also iteratively edit their sketches through a chat dialogue!
+            </p>
+            </div>
+            <div class="item">
+              <p style="margin-bottom: 30px">
+            <video poster="" id="tree" autoplay controls muted loop height="100%">
+              <source src="static/apps/SketchAgent_apps3.mov" type="video/mp4">
+            </video>
+            </p>
+             </div>
+
+             <div class="content has-text-justified">
+              <p>
+                Additionally, the strong prior of LLMs can be leveraged to perform various types of sketch editing, such as animating sketches with CSS! 
+
+              </p>
+              </div>
+              <div class="item">
+                <p style="margin-bottom: 30px">
+              <video poster="" id="tree" autoplay controls muted loop height="100%">
+                <source src="static/apps/SketchAgent_apps4.mov" type="video/mp4">
+              </video>
+              </p>
+               </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- How does it work? -->
+<section class="section">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <div class="container is-max-desktop">
+    <div class="section-title has-text-centered is-centered">
+      <h2 class="title is-3">How does it work?</h2><br>
+    </div>
+    <div class="columns is-centered has-text-centered">
+
+      <div class="column is-centered  has-text-centered">
+        <div class="content has-text-justified">
+          We leverage an off-the-shelf pretrained multimodal LLM to draw sketches based on natural language instructions. <br>
+          Although these models can produce SVGs through direct prompting, the results often appear "mechanical," with uniform and overly precise shapes that lack the organic qualities of human sketches:
+        </div>
+          <img id="network" src="static/images/method/LLM-simple-giraffe.svg"/>
+          <div class="content has-text-justified">
+            <br>Furthermore, while these models excel in textual tasks, they often struggle with fine-grained spatial reasoning, limiting their effectiveness for sketch editing.
+            <br>
+            To overcome these challenges, we introduce an intuitive sketching language that combines a grid canvas with Bézier curve processing.<br>
+            
+            <ol>
+              <li>The canvas is a numbered grid (1–50) along the x-axis and y-axis. Each cell is uniquely identified by its x and y coordinates (e.g., the bottom-left cell is x1y1).</li>
+              <li>In our sketching language, a sketch is defined as a sequence of n ordered strokes, where each stroke is defined by a sequence of m cell coordinates on the grid:</li>
+            </ol>
+          </div>
+          <img id="network" src="static/images/method/grid_explain.svg"/>
+          <div class="content has-text-justified">
+            <br>How to we process the textual strokes so that the sketch appears more natural?<br>
+            We treat the specified (x,y) coordinates as a set of desired points sampled <b>along</b> the curve, and fit a smooth Bezier curve to them.
+            <br>Here is how a cubic Bezier curve is defined mathematically:<br>
+            <p>
+              \[
+              B(t) = (1 - t)^3P_0 + 3(1-t)^2tP_1 + 3(1-t)t^2P_2 + t^3P_3,
+              \]
+          </p>
+          Where the set \(P=\{P_0, P_1, P_2, P_3\}\) is often referred to as the curve's control points, and \(t\in[0,1]\) is a parameter that moves the point along the curve from \(P_0\) at \(t=0\) to \(P_3\) at \(t=1\).
+          <br>To fit a curve to the specified coordinates, the model determines <b>when</b> each point on the curve is reached, corresponding to the \(t\) parameter.
+          <br>Using the provided coordinates and \(t\) values, we fit a cubic Bézier curve to the sampled points by solving a system of linear equations with least squares, where the unknowns are the control points \(P={P_0,P_1,P_2,P_3}\):
+          <p>
+            \[
+            P = \text{argmin}_P ||AP - B||,
+            \]
+          </p>
+          After proccessing the agent's output into vector graphics, we render the strokes onto the canvas to form the final sketch. The overall process is seen below:<br>
+        </div>
+        <img id="network" src="static/images/method/pipe.svg"/>
+        <div class="content has-text-justified">
+          SketchAgent, a frozen multimodal LLM, takes three inputs: (1) a system prompt detailing the sketching language guidelines, (2) a user prompt with task-specific instructions (e.g., "Draw a shark"), and (3) a blank canvas for sketching.
+          <br>Based on the task, the agent generates a textual response representing the sequence of strokes. These strokes are processed into vector graphics and rendered onto the canvas. The canvas can then be reused in two ways: (1) it can be fed back into the model with updated prompts for additional tasks or edits, or (2) it can be accessed by a human user for collaborative sketching.
+        </div>
+
+          
+
+    </div>
+  </div>
+ 
+  </section>
+
+<!--Gallery-->
+<section class="section hero is-light">
+  <div class="container is-widescreen" id="gallery">
+    
+    <div class="section-title has-text-centered is-centered">
+      <h2 class="title is-3">Gallery</h2><br>
+    </div>
+    <div class="container is-max-desktop is-centered has-text-centered">
+      <div class="gallery"  id="svgGallery">
+        
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/00_butterfly.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">butterfly</h6>
+        </div>
+
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/01_output_camel.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">camel</h6>
+        </div>
+
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/02_output_elephant.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">elephant</h6>
+        </div>
+
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/03_output_frog.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">frog</h6>
+        </div>
+
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/04_output_raccoon.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">raccoon</h6>
+        </div>
+
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/05_Taj_Mahal.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">Taj Mahal</h6>
+        </div>
+
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/06_output_Big Ben.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">Big Ben</h6>
+        </div>
+
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/07_output_Mount Fuji.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">Mount Fuji</h6>
+        </div>
+
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/08_output_Statue of Liberty.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">Statue of Liberty</h6>
+        </div>
+
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/09_output_Sydney Opera House.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">Sydney Opera House</h6>
+        </div>
+
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/10_output_DNA Double Helix.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">DNA Double Helix</h6>
+        </div>
+
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/11_output_Double-slit experiment.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">Double-slit experiment</h6>
+        </div>
+
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/12_output_Flowchart5.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">Flowchart</h6>
+        </div>
+
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/13_output_Pendulum motion.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">Pendulum motion</h6>
+        </div>
+
+        <div class="captioned_video">
+          <div class="inner_gallery">
+            <img class="gallery_img under grid_r_1 grid_c_1" src="static/gallery/14_partial_board.svg" alt="dolphin_2"/>
+          </div>
+          <h6 title="">A robot drawing on a canvas</h6>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--Variability-->
+<section class="section">
+  <div class="container " id="gallery">
+    <div class="section-title has-text-centered is-centered">
+    <div class="content has-text-justified">
+      Leveraging the inherent versatility of LLMs, our method generates highly diverse sketches. Below, we showcase 30 sketches illustrating a wide range of poses, structures, and qualities across various concepts.
+    </div>
+    <div id="results-carousel" class="carousel results-carousel">
+      <!-- TODO: add more images -->
+        <!-- <img id="sailboat" style="width: 90%; margin-top: 20px; margin-left: 30px;" src="static/images/variability/rabbit.svg"/>
+        <img id="rabbit" style="width: 90%; margin-top: 20px; margin-left: 30px;" src="static/images/variability/sailboat.svg"/>
+        <img id="rabbit" style="width: 90%; margin-top: 20px; margin-left: 30px;" src="static/images/variability/butterfly.svg"/>
+        <img id="rabbit" style="width: 90%; margin-top: 20px; margin-left: 30px;" src="static/images/variability/fish.svg"/>
+        <img id="rabbit" style="width: 90%; margin-top: 20px; margin-left: 30px;" src="static/images/variability/coffee_mug.svg"/>
+        <img id="rabbit" style="width: 90%; margin-top: 20px; margin-left: 30px;" src="static/images/variability/glasses.svg"/>
+        <img id="rabbit" style="width: 90%; margin-top: 20px; margin-left: 30px;" src="static/images/variability/duck.svg"/>   -->
+  </div>
+</div>
+</div>
+</section>
+
+<section class="section hero is-light">
+  <div class="container " id="gallery">
+  <div class="section is-centered has-text-centered">
+    We demonstrate the potential of our system for facilitating interactive human-agent collaboration, resulting in semantically meaningful and recognizable sketches.<br>
+    We design a web-based collaborative sketching environment where users and SketchAgent take turns drawing on a shared canvas to create a recognizable sketch from a given textual concept.
+    Participants sketched concepts in two modes: <b>solo</b>, where users drew independently, and <b>collab</b>, where users and SketchAgent collaborated, adding one stroke at a time until either was satisfied with the drawing.<br>
+    In <b><span style="color: green;">green</span></b> are user drawn strokes and in <b><span style="color: pink;">pink</span></b> are agent drawn strokes.
+  </div>
+  <div id="results-carousel" class="carousel results-carousel">
+    <div class="columns is-centered has-text-centered is-variable is-8">
+      <div class="comparisons_gallery">
+        <div class="captioned_video">
+         <img class="comp_src_img" src="static/images/collab/user/coffee_mug_final_sketch.svg" alt="penguin"/>
+         <h6 class="caption">User-only</h6>
+        </div>
+        <div class="captioned_video">
+         <img class="comp_src_img" src="static/images/collab/agent/output_pink_coffee_mug.svg" alt="penguin"/>
+         <h6 class="caption">Agent-only</h6>
+        </div>
+        <div class="captioned_video">
+         <img class="comp_src_img" src="static/images/collab/collab/coffee_mug_final_sketch.svg" alt="penguin"/>
+         <h6 class="caption">User-Agent collaboration</h6>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered is-variable is-8">
+      <div class="comparisons_gallery">
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/user/glasses_final_sketch.svg" alt="penguin"/>
+          <h6 class="caption">User-only</h6>
+        </div>
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/agent/output_pink_glasses.svg" alt="penguin"/>
+          <h6 class="caption">Agent-only</h6>
+        </div>
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/collab/glasses_final_sketch.svg" alt="penguin"/>
+          <h6 class="caption">User-Agent collaboration</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered is-variable is-8">
+      <div class="comparisons_gallery">
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/user/duck_final_sketch.svg" alt="penguin"/>
+          <h6 class="caption">User-only</h6>
+        </div>
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/agent/output_pink_duck.svg" alt="penguin"/>
+          <h6 class="caption">Agent-only</h6>
+        </div>
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/collab/duck_final_sketch.svg" alt="penguin"/>
+          <h6 class="caption">User-Agent collaboration</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered is-variable is-8">
+      <div class="comparisons_gallery">
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/user/car_final_sketch.svg" alt="penguin"/>
+          <h6 class="caption">User-only</h6>
+        </div>
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/agent/output_pink_car.svg" alt="penguin"/>
+          <h6 class="caption">Agent-only</h6>
+        </div>
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/collab/car_final_sketch.svg" alt="penguin"/>
+          <h6 class="caption">User-Agent collaboration</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered is-variable is-8">
+      <div class="comparisons_gallery">
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/user/fish_final_sketch.svg" alt="penguin"/>
+          <h6 class="caption">User-only</h6>
+        </div>
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/agent/output_pink_fish.svg" alt="penguin"/>
+          <h6 class="caption">Agent-only</h6>
+        </div>
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/collab/fish_final_sketch.svg" alt="penguin"/>
+          <h6 class="caption">User-Agent collaboration</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered is-variable is-8">
+      <div class="comparisons_gallery">
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/user/sailboat_final_sketch.svg" alt="penguin"/>
+          <h6 class="caption">User-only</h6>
+        </div>
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/agent/output_pink_sailboat.svg" alt="penguin"/>
+          <h6 class="caption">Agent-only</h6>
+        </div>
+        <div class="captioned_video">
+          <img class="comp_src_img" src="static/images/collab/collab/sailboat_final_sketch.svg" alt="penguin"/>
+          <h6 class="caption">User-Agent collaboration</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+  
+
+<section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+        @InProceedings{SketchAgent_Vinker2025,
+            author    = {Vinker, Yael and Shaham, Tamar Rott and Zheng, Kristine and Zhao, Alex and E Fan, Judith and Torralba, Antonio},
+            title     = {SketchAgent: Language-Driven Sequential Sketch Generation},
+            booktitle = {Proceedings of the Computer Vision and Pattern Recognition Conference (CVPR)},
+            month     = {June},
+            year      = {2025},
+            pages     = {23355-23368}
+        }
+      </code></pre>
+    </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="coming soon">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/yael-vinker/live_sketch" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website content is licensed under a <a rel="license"
+                                                href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative
+            Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Website source code based on the <a href="https://nerfies.github.io/"> Nerfies</a> project page. If you want to reuse their <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a>, please credit them appropriately.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+</body>
+</html>
