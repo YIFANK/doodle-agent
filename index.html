@@ -124,14 +124,14 @@
       <h2 class="title is-3">What is Doodle Agent?</h2>
         <div class="content has-text-justified">
         <p>
-          Doodle Agent is a drawing system that leverages LLMs to generate sequential sketches. &#x1F58C;&#xFE0F; <br>
-          Given a text prompt, it produces a sequence of strokes that are rendered to the canvas, transforming language into visual concepts! &#x1F3A8;
+          Doodle Agent generates drawings by iteratively interacting with a drawing canvas. &#x1F58C;&#xFE0F; <br>
+          The environment provides a blank canvas, multiple brush types, and a palette of colors. The LLM interacts with this environment by sequentially selecting a brush, choosing its color, and specifying a series of (x, y) coordinates for the brush to follow. &#x1F3A8;
         </p>
         </div>
         <div class="item">
           <p style="margin-bottom: 30px">
         <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/apps/SketchAgent_apps1.mov" type="video/mp4">
+          <source src="static/videos/DoodleAgent_demo.mov" type="video/mp4">
         </video>
         </p>
          </div>
@@ -143,120 +143,83 @@
   </div>
 </section>
 
-<section class="section  hero is-light">
+<section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-    <div class="column is-four-fifths">
-   
+      <div class="column is-four-fifths">
 
-         <h2 class="title is-3">What Can You Do with It?</h2>
-         
+        <h2 class="title is-3">🛠️ Method</h2>
 
-         <div class="content has-text-justified">
-          
+        <div class="content has-text-justified">
           <p>
-            <h3 class="title is-4">🖌️ Interactive Sketching</h3>
-            Through our interface, users can <strong style="color: #eb4e75;">collaborate</strong> with SketchAgent to draw together, stroke by stroke, engaging in a fun and creative drawing experience. <strong> <a href="https://github.com/yael-vinker/SketchAgent" class="demo-link">Check out our demo!</a></strong>
+            <h3 class="title is-4">🎨 Drawing Environment</h3>
+            Doodle Agent uses a <strong>web-based canvas built in p5.js</strong> with 
+            <strong style="color: #eb4e75;">five brush types</strong> and 
+            <strong style="color: #eb4e75;">a palette of 36 colors</strong>.  
+            At each step, the multimodal LLM receives the current canvas and instructions, and outputs a 
+            <code>JSON</code> command specifying brush, color, and stroke coordinates.  
+            These commands are rendered onto the canvas, and the process repeats for up to 15 strokes. 
           </p>
-          </div>
-          <div class="item">
-            <p style="margin-bottom: 30px">
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="static/apps/sketchagent_app2.mov" type="video/mp4">
-          </video>
-          </p>
-           </div>
+        </div>
 
-           <div class="content has-text-justified">
-            <p>
-              <h3 class="title is-4">🖌️ Chat-Based Sketch Editing</h3>
-              Users can also iteratively edit their sketches through a chat dialogue!
-            </p>
-            </div>
-            <div class="item">
-              <p style="margin-bottom: 30px">
-            <video poster="" id="tree" autoplay controls muted loop height="100%">
-              <source src="static/apps/SketchAgent_apps3.mov" type="video/mp4">
+        <div class="item">
+          <p style="margin-bottom: 30px">
+            <img src="static/images/method_overview.png" alt="Method overview diagram" width="100%">
+          </p>
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
+            <h3 class="title is-4">🤖 LLM Backbone</h3>
+            We explore both <strong>Claude 3.5 Sonnet</strong> and <strong>GPT-4o</strong> as frozen LLM agents.  
+            The models are prompted with open-ended instructions and canvas feedback, encouraging 
+            <strong style="color: #eb4e75;">freeform exploration</strong> rather than predefined goals.  
+          </p>
+        </div>
+
+        <hr style="margin: 40px 0;">
+
+        <h2 class="title is-3">✏️ Drawing Modes</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            <h3 class="title is-4">1. Unconstrained Doodling</h3>
+            The agent is prompted with:  
+            <em>“You are a creative artist who loves to doodle! Draw whatever feels fun and interesting to you right now.”</em>  
+            This mode evaluates spontaneous, casual doodling without restrictions. 
+          </p>
+        </div>
+
+        <div class="item">
+          <p style="margin-bottom: 30px">
+            <video poster="" autoplay controls muted loop height="100%">
+              <source src="static/videos/unconstrained_doodle.mov" type="video/mp4">
             </video>
-            </p>
-             </div>
+          </p>
+        </div>
 
-             <div class="content has-text-justified">
-              <p>
-                Additionally, the strong prior of LLMs can be leveraged to perform various types of sketch editing, such as animating sketches with CSS! 
+        <div class="content has-text-justified">
+          <p>
+            <h3 class="title is-4">2. Mood-Constrained Doodling</h3>
+            The agent receives an additional emotional context:  
+            <em>“You express your emotions through your doodles. You are feeling very {mood} today.”</em>  
+            where <code>{mood}</code> ∈ {happy, sad, angry}.  
+            This encourages the agent to align color and form choices with emotional states.  
+          </p>
+        </div>
 
-              </p>
-              </div>
-              <div class="item">
-                <p style="margin-bottom: 30px">
-              <video poster="" id="tree" autoplay controls muted loop height="100%">
-                <source src="static/apps/SketchAgent_apps4.mov" type="video/mp4">
-              </video>
-              </p>
-               </div>
-    </div>
+        <div class="item">
+          <p style="margin-bottom: 30px">
+            <video poster="" autoplay controls muted loop height="100%">
+              <source src="static/videos/mood_doodle.mov" type="video/mp4">
+            </video>
+          </p>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
-
-
-<!-- How does it work? -->
-<section class="section">
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <div class="container is-max-desktop">
-    <div class="section-title has-text-centered is-centered">
-      <h2 class="title is-3">How does it work?</h2><br>
-    </div>
-    <div class="columns is-centered has-text-centered">
-
-      <div class="column is-centered  has-text-centered">
-        <div class="content has-text-justified">
-          We leverage an off-the-shelf pretrained multimodal LLM to draw sketches based on natural language instructions. <br>
-          Although these models can produce SVGs through direct prompting, the results often appear "mechanical," with uniform and overly precise shapes that lack the organic qualities of human sketches:
-        </div>
-          <img id="network" src="static/images/method/LLM-simple-giraffe.svg"/>
-          <div class="content has-text-justified">
-            <br>Furthermore, while these models excel in textual tasks, they often struggle with fine-grained spatial reasoning, limiting their effectiveness for sketch editing.
-            <br>
-            To overcome these challenges, we introduce an intuitive sketching language that combines a grid canvas with Bézier curve processing.<br>
-            
-            <ol>
-              <li>The canvas is a numbered grid (1–50) along the x-axis and y-axis. Each cell is uniquely identified by its x and y coordinates (e.g., the bottom-left cell is x1y1).</li>
-              <li>In our sketching language, a sketch is defined as a sequence of n ordered strokes, where each stroke is defined by a sequence of m cell coordinates on the grid:</li>
-            </ol>
-          </div>
-          <img id="network" src="static/images/method/grid_explain.svg"/>
-          <div class="content has-text-justified">
-            <br>How to we process the textual strokes so that the sketch appears more natural?<br>
-            We treat the specified (x,y) coordinates as a set of desired points sampled <b>along</b> the curve, and fit a smooth Bezier curve to them.
-            <br>Here is how a cubic Bezier curve is defined mathematically:<br>
-            <p>
-              \[
-              B(t) = (1 - t)^3P_0 + 3(1-t)^2tP_1 + 3(1-t)t^2P_2 + t^3P_3,
-              \]
-          </p>
-          Where the set \(P=\{P_0, P_1, P_2, P_3\}\) is often referred to as the curve's control points, and \(t\in[0,1]\) is a parameter that moves the point along the curve from \(P_0\) at \(t=0\) to \(P_3\) at \(t=1\).
-          <br>To fit a curve to the specified coordinates, the model determines <b>when</b> each point on the curve is reached, corresponding to the \(t\) parameter.
-          <br>Using the provided coordinates and \(t\) values, we fit a cubic Bézier curve to the sampled points by solving a system of linear equations with least squares, where the unknowns are the control points \(P={P_0,P_1,P_2,P_3}\):
-          <p>
-            \[
-            P = \text{argmin}_P ||AP - B||,
-            \]
-          </p>
-          After proccessing the agent's output into vector graphics, we render the strokes onto the canvas to form the final sketch. The overall process is seen below:<br>
-        </div>
-        <img id="network" src="static/images/method/pipe.svg"/>
-        <div class="content has-text-justified">
-          SketchAgent, a frozen multimodal LLM, takes three inputs: (1) a system prompt detailing the sketching language guidelines, (2) a user prompt with task-specific instructions (e.g., "Draw a shark"), and (3) a blank canvas for sketching.
-          <br>Based on the task, the agent generates a textual response representing the sequence of strokes. These strokes are processed into vector graphics and rendered onto the canvas. The canvas can then be reused in two ways: (1) it can be fed back into the model with updated prompts for additional tasks or edits, or (2) it can be accessed by a human user for collaborative sketching.
-        </div>
-
-          
-
-    </div>
-  </div>
- 
-  </section>
 
 <!--Gallery-->
 <section class="section hero is-light">
@@ -518,14 +481,13 @@
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
       <pre><code>
-        @InProceedings{SketchAgent_Vinker2025,
-            author    = {Vinker, Yael and Shaham, Tamar Rott and Zheng, Kristine and Zhao, Alex and E Fan, Judith and Torralba, Antonio},
-            title     = {SketchAgent: Language-Driven Sequential Sketch Generation},
-            booktitle = {Proceedings of the Computer Vision and Pattern Recognition Conference (CVPR)},
-            month     = {June},
-            year      = {2025},
-            pages     = {23355-23368}
-        }
+        @inproceedings{cao2025doodleagent,
+          title     = {Doodle Agent: Exploring Freeform Visual Generation with Multimodal LLMs},
+          author    = {Cao, Dingning and Kang, Yifan and Torralba, Antonio and Vinker, Yael},
+          booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision Workshops (ICCVW)},
+          year      = {2025},
+          note      = {AI4VA Workshop},
+        }        
       </code></pre>
     </div>
 </section>
